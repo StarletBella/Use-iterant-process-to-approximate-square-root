@@ -1,0 +1,64 @@
+//Write a C++ program that uses the iteration process above to approximate the square root of a positive number a. 
+//The value of a will be entered from the console, as well as a tolerence ε. 
+//Iteration will continue until |x₁-x₀|<ε, when the program will terminate. 
+//The value of x₁ at that point will be declared the appropriate approximation. 
+//Output will be to a file that can be imported into SWP. 
+//Include the step of the process, e. g., 1,2,3,…, as well as the approximation at that step. 
+
+// a program that uses the iteration process to approximate the square root of a positive number a. #include <iostream> 
+#include <fstream> 
+#include <stdlib.h> 
+#include <math.h> 
+#include <iomanip> 
+using namespace std; 
+int main(void) 
+{ 
+const int n = 20; 
+double a, b, c, x₀, x₁, x₂, x; 
+double appropriate_approximation; 
+const double tolerence = 10e-8; 
+char zzz; 
+const char filepath[] = "C:\\CoutputFiles\\Homework Project 3.txt"; 
+const char ErrorMessage[] = "Can't open file "; 
+fstream OutStream(filepath, ios::out); 
+if (OutStream.fail()) 
+{ 
+cerr << ErrorMessage << filepath; 
+cin >> zzz; 
+exit(-1); 
+} 
+OutStream << setprecision(15); 
+cout << setprecision(15); 
+cout << "Input your last 2 digits of your St.john's X number \n"; 
+cin >> b; 
+a = b + 40; 
+cout << "The real positive number you want to calculate is" << " " << a << "\n"; 
+cout << "Input a tolerance \n"; 
+cin >> c; 
+if ((c) != (tolerence)) 
+{ 
+cout << "The tolerance you input is not suitable for calculation, program terminating \n"; 
+cin >> zzz; 
+exit(-1); 
+} 
+cout << "Input a real positive number that guesses the square root of" << " " << a << "\n"; 
+cin >> x₀; 
+x₁ = (((x₀ + (a / (x₀)))) / 2); 
+cout << "step 1 : " << x₁ << setprecision(15) << "\n"; 
+OutStream << "1" << "," << x₁ << setprecision(15) << ","; 
+while (fabs(x₁ - x₀) < tolerence); 
+{ 
+for (int i = 2; i <= n; i++) 
+{ 
+x₀ = x₁; 
+x₁ = (((x₀ + (a / (x₀)))) / 2); 
+cout << "step" << i << " :" << x₁ << "\n"; 
+OutStream << i << "," << x₁ << ","; 
+} 
+} 
+OutStream.close(); 
+cout << "information has been written to your file \n"; 
+cout << "\nPress any key to close.\n"; 
+cin >> zzz; 
+return 0; 
+}
